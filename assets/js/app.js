@@ -165,9 +165,22 @@ const toggleMnemonicRestoreModal = () => {
 //implement sign feature
 
 
-const signMessage = async ()=>{
-  const wallet = getEncryptedWallet();
-  const inputMsg = document.getElementById('inputMsg').value;
-   const signedMsg  = await  wallet.signMessage(inputMsg);
-  document.getElementById("signedMessage").textContent = signedMsg;
-}
+
+
+
+
+const signMessage = async () => {
+  const messageInput = document.getElementById("inputMsg");
+  const signedMessage = document.getElementById("signedMessage");
+  const inputMsg = messageInput.value;
+
+  if (!inputMsg) {
+    alert("Please enter the message");
+    return;
+  }
+
+  const wallet = await loadFromPrivateKey();
+  const result = await wallet.signMessage(inputMsg);
+
+  signedMessage.textContent = result;
+};
