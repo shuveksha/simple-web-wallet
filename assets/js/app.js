@@ -161,3 +161,13 @@ const togglePasscodeModal = () => {
 const toggleMnemonicRestoreModal = () => {
   $('#mdlMnemonicRestore').modal('toggle');
 };
+
+//implement sign feature
+
+
+const signMessage = async ()=>{
+  const wallet = getEncryptedWallet();
+  const inputMsg = document.getElementById('inputMsg').value;
+   const signedMsg  = await  wallet.signMessage(inputMsg);
+  document.getElementById("signedMessage").textContent = signedMsg;
+}
